@@ -5,8 +5,6 @@ import { fetchOpenWeatherData, OpenWeatherData, OpenWeatherTempScale } from "../
 
 
 
-
-
 const WeatherCardContainer: React.FC<{
     children: React.ReactNode
     onDelete?: () => void
