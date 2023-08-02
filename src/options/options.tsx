@@ -13,7 +13,6 @@ type FormState = 'ready' | 'saving'
 
 
 
-
 const App: React.FC<{}> = () => {
 
   const [options, setOptions] = useState<LocalStorageOptions | null>(null)
@@ -23,8 +22,6 @@ const App: React.FC<{}> = () => {
     getStoredOptions().then((options) => setOptions(options))
   }, [])
 
-
-
   const handleHomeCityChange = (homeCity: string) => {
     setOptions({
       ...options,
@@ -32,28 +29,14 @@ const App: React.FC<{}> = () => {
     })
   }
 
-
   const handleSaveButtonClick = () => {
     setFormState('saving')
     setStoredOptions(options).then(() => {
-
-
       setTimeout(() => {
-        
         setFormState('ready')
-        
       }, 700);
-
-
-
-
-
-
     })
   }
-
-
-
 
 
   if (!options) {
@@ -64,19 +47,14 @@ const App: React.FC<{}> = () => {
   const isFieldDisabled = formState === 'saving'
 
 
-
   return (
     <Box mx="10%" my="2%">
       <Card>
         <CardContent>
           <Grid container direction='column' spacing={4}>
-
-
             <Grid item>
               <Typography variant="h4">Weather Extension Options</Typography>
             </Grid>
-
-
             <Grid item>
               <Typography variant="body1">Home city name</Typography>
               <TextField
@@ -87,17 +65,11 @@ const App: React.FC<{}> = () => {
                 disabled={isFieldDisabled}
               />
             </Grid>
-
-
             <Grid item>
               <Button variant='contained' color='primary' onClick={handleSaveButtonClick} disabled={isFieldDisabled}>
                 {formState === 'ready' ? 'Save' : 'Saving...'}
               </Button>
             </Grid>
-
-
-
-
           </Grid>
         </CardContent>
       </Card>
