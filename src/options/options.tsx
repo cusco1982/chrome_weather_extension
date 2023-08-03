@@ -69,9 +69,13 @@ const App: React.FC<{}> = () => {
       <Card>
         <CardContent>
           <Grid container direction='column' spacing={4}>
+
+
             <Grid item>
               <Typography variant="h4">Weather Extension Options</Typography>
             </Grid>
+
+
             <Grid item>
               <Typography variant="body1">Home city name</Typography>
               <TextField
@@ -88,14 +92,14 @@ const App: React.FC<{}> = () => {
             <Grid item>
               <Typography variant="body1">Auto toggle overlay on webpage load</Typography>
               <Switch
-              
-              color='primary'
-              checked={options.hasAutoOverlay}
-              onChange={(event, checked) => handleAutoOverlayChange(checked)}
-              disabled={isFieldDisabled}
-            
-              
-              
+
+                color='primary'
+                checked={options.hasAutoOverlay}
+                onChange={(event, checked) => handleAutoOverlayChange(checked)}
+                disabled={isFieldDisabled}
+
+
+
               />
             </Grid>
 
@@ -110,6 +114,9 @@ const App: React.FC<{}> = () => {
                 {formState === 'ready' ? 'Save' : 'Saving...'}
               </Button>
             </Grid>
+
+
+
           </Grid>
         </CardContent>
       </Card>

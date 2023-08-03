@@ -44,7 +44,7 @@ const WeatherCard: React.FC<{
     tempScale: OpenWeatherTempScale
     onDelete?: () => void
 
-}> = ({ city,tempScale, onDelete }) => {
+}> = ({ city, tempScale, onDelete }) => {
 
 
     const [weatherData, setWeatherData] = useState<OpenWeatherData | null>(null)

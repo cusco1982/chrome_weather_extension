@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Card } from "@material-ui/core";
 import WeatherCard from "../components/WeatherCard";
 import { getStoredOptions, LocalStorageOptions } from "../utils/storage";
+import { Messages } from "../utils/messages";
 import './contentScript.css';
+
+
+type MessageListener = (
+    message: any,
+    sender: chrome.runtime.MessageSender,
+    sendResponse: (response?: any) => void
+) => void;
+
 
 
 
@@ -12,23 +21,53 @@ const App: React.FC<{}> = () => {
     const [isActive, setIsActive] = useState<boolean>(false)
 
 
+    const currentListener = useRef<MessageListener>(null)
+
     useEffect(() => {
 
         getStoredOptions().then((options) => {
-
             setOptions(options)
             setIsActive(options.hasAutoOverlay)
-
         })
 
-
     }, [])
+
+
+
+    useEffect(() => {
+
+        // chrome.runtime.onMessage.addListener((msg) => {
+        //     if (msg === Messages.TOGGLE_OVERLAY) {
+        //         setIsActive(!isActive)
+        //     }
+        // })
+
+
+        if (currentListener.current) {
+            chrome.runtime.onMessage.removeListener(currentListener.current)
+        }
+
+        currentListener.current = (message: Messages) => {
+            if (message === Messages.TOGGLE_OVERLAY) {
+                setIsActive(!isActive)
+            }
+        }
+
+
+        chrome.runtime.onMessage.addListener(currentListener.current)
+
+
+
+    }, [isActive])
+
 
 
 
     if (!options) {
         return null
     }
+
+
 
     return (
 
