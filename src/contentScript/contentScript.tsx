@@ -36,12 +36,6 @@ const App: React.FC<{}> = () => {
 
     useEffect(() => {
 
-        // chrome.runtime.onMessage.addListener((msg) => {
-        //     if (msg === Messages.TOGGLE_OVERLAY) {
-        //         setIsActive(!isActive)
-        //     }
-        // })
-
 
         if (currentListener.current) {
             chrome.runtime.onMessage.removeListener(currentListener.current)
